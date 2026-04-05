@@ -1,11 +1,20 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import Hero from '@/components/home/Hero.astro';
 import Layout from '../layouts/Layout.astro';
+import Services from '@/components/home/Services.astro';
+import Team from '@/components/home/Team.astro';
+import Faq from '@/components/home/Faq.astro';
+import Contact from '@/components/home/Contact.astro';
+
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="GNP | Huehuetoca" description="Protegemos tu futuro con seguros confiables y asesoría profesional para ti y tu familia.">
+	<Hero/>
+	<Services/>
+	<Team/>
+	<Faq/>
+	<Contact/>
 </Layout>

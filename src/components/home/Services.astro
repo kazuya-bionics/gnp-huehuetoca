@@ -1,0 +1,76 @@
+---
+
+import { Icon } from 'astro-icon/components';
+
+---
+
+<div class="w-full h-screen bg-slate-200 px-8 flex flex-col justify-center">
+    <div class="font-semibold">
+        <p class="text-[#ff6600] text-sm">
+        SERVICIOS PREMIUM
+        </p>
+        <h3 class="text-3xl mt-2">
+            Soluciones pensadas para el <span class="border-b-2 border-[#ff6600] italic">bienestar
+            <br/>
+            Humano.</span>
+        </h3>
+    </div>
+
+    <!-- grid cards -->
+
+    <div class="w-full grid grid-cols-3 gap-x-16 py-8">
+
+        <!-- vida -->
+
+        <div class="bg-white rounded-3xl shadow-xl shadow-slate-200 p-6 grid grid-cols-1 gap-y-8 translate-y-12">
+            <div class="text-white bg-slate-900 p-2 w-16 h-16 rounded-3xl items-center justify-center flex">
+                <Icon name="material-symbols:family-restroom" size={28}/>
+            </div>
+            <div class="grid grid-cols-1 gap-y-2">
+                <h3 class="text-xl font-semibold">Vida & Familia</h3>
+                <p>
+                    Asegura el futuro educativo y la
+                    estabilidad financiera de quienes mas
+                    quieres con planes de ahorro y
+                    proteccion vitalicia.
+                </p>
+            </div>
+            <button class="w-28 text-[#ff6600] mt-2 flex items-center gap-x-2">Saber mas <span> <Icon name="material-symbols:arrow-forward" size={18} /></span> </button>
+        </div>
+
+        <!-- GMM -->
+
+        <div class="bg-white rounded-3xl shadow-xl shadow-slate-200 p-6 grid grid-cols-1 gap-y-8">
+            <div class="text-white bg-slate-900 p-2 w-16 h-16 rounded-3xl items-center justify-center flex">
+                <Icon name="material-symbols:family-restroom" size={28}/>
+            </div>
+            <div class="grid grid-cols-1 gap-y-2">
+                <h3 class="text-xl font-semibold">Gastos Médicos</h3>
+                <p>
+                    Acceso a la mejor red hospitalaria y
+                    atencion de primer nivel sin que tu
+                    patrimonio se vea comprometido.
+                </p>
+            </div>
+            <button class="w-28 text-[#ff6600] mt-2 flex items-center gap-x-2">Saber mas <span> <Icon name="material-symbols:arrow-forward" size={18} /></span> </button>
+        </div>
+
+        <!-- AHORRA MAS -->
+
+        <div class="bg-white rounded-3xl shadow-xl shadow-slate-200 p-6 grid grid-cols-1 gap-y-8 translate-y-12 ">
+            <div class="text-white bg-slate-900 p-2 w-16 h-16 rounded-3xl items-center justify-center flex">
+                <Icon name="material-symbols:savings" size={28} />
+            </div>
+            <div class="grid grid-cols-1 gap-y-2">
+                <h3 class="text-xl font-semibold">Ahorra mas</h3>
+                <p>
+                    construye hoy la libertad financiera
+                    que mereces mañana a traves de estrategias
+                    de ahorro inteligente.
+                </p>
+            </div>
+            <button class="w-28 text-[#ff6600] mt-2 flex items-center gap-x-2">Saber mas <span> <Icon name="material-symbols:arrow-forward" size={18} /></span> </button>
+        </div>
+        
+    </div>
+</div>

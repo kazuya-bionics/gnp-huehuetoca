@@ -1,0 +1,41 @@
+---
+
+import { Icon } from 'astro-icon/components';
+
+---
+
+<section class="grid grid-cols-2 bg-slate-200 px-8 pb-16 pt-2 gap-12">
+
+    <div class="p-8 bg-white shadow-xl rounded-3xl flex flex-col gap-y-8 ">
+        <div class="bg-slate-200 w-10 h-10 flex items-center justify-center rounded-md text-blue-800">
+            <Icon name="material-symbols:medical-information-rounded" size={28} />
+        </div>
+        <div>  
+            <h3 class="text-2xl font-semibold">
+                Gastos Medicos
+            </h3>
+            <p class="text-sm mt-3">
+                Acceso a la red hospitalaria mas prestigiosa, Soluciones de 
+                salud integrales diseñadas para proteger su bienestar y el de
+                sus seres queridos sin compromisos
+            </p>
+        </div>
+        <button class="w-38 text-sm text-[#ff6600] flex items-center gap-x-2">Solicitar Detalles <span> <Icon name="material-symbols:arrow-forward" size={18} /></span> </button>
+    </div>
+    <div class="p-8 bg-white shadow-xl rounded-3xl flex flex-col gap-y-8">
+        <div class="bg-slate-200 w-10 h-10 flex items-center justify-center rounded-md text-blue-800">
+            <Icon name="material-symbols:savings"  size={28} />
+        </div>
+        <div>  
+            <h3 class="text-2xl font-semibold">
+                Plan de ahorro
+            </h3>
+            <p class="text-sm mt-3">
+                Acceso a la red hospitalaria mas prestigiosa, Soluciones de 
+                salud integrales diseñadas para proteger su bienestar y el de
+                sus seres queridos sin compromisos
+            </p>
+        </div>
+        <button class="w-38 text-sm text-[#ff6600] flex items-center gap-x-2">Explorar Planes <span> <Icon name="material-symbols:arrow-forward" size={18} /></span> </button>
+    </div>
+</section>

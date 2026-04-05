@@ -1,0 +1,61 @@
+---
+import Image from 'astro/components/Image.astro';
+import heroImage from "@/assets/heroImage.png";
+
+import { Icon } from 'astro-icon/components';
+---
+
+<div class="bg-[#f8f9fa] w-full h-screen flex justify-center items-center">
+		
+		<div class="w-[50vw] flex flex-col px-8 gap-y-4 mt-14">
+			<div class="bg-[#ff6600]/35 opacity-75 flex w-50 items-center justify-center gap-x-2 text-xs font-semibold py-1 rounded-full ">
+				<div class="w-2 h-2 rounded-full bg-[#ff6600]"/>
+				<p class="opacity-90">
+					AGENTES DE SEGUROS
+				</p>
+			</div>
+			<div class="text-7xl flex flex-col font-semibold">
+				<h3>Asesoria que inspira <span class="text-[#ff6600] italic"> Confianza </span></h3>
+			</div>
+			<div class="text-sm opacity-65">
+				<p>
+					En GNP Huehuetoca no vendemos polizas; diseñamos legados.
+				</p>
+				<p>
+					Descubre una consultoria humana enfocada en proteger lo que más
+				</p>
+				<p>
+					amas con estrategias a tu medida
+				</p>
+			</div>
+			<div class="text-sm mt-4 flex gap-x-4">
+				<button class="p-3 rounded-md text-white bg-[#ff6600]">
+					Hablar con un Experto
+				</button>
+				<button class="p-3 rounded-md border-2">
+					Nuestra Metodologia
+				</button>
+			</div>
+		</div>
+
+		<!-- image section -->
+
+		<div class="w-[50vw] flex justify-end mr-8 relative">
+			<Image src={heroImage} alt="image" class="w-116 h-116 shadow-2xl shadow-slate-400 rounded-3xl mt-14"/>
+			<div class="absolute text-sm -bottom-6 left-16 flex items-center justify-center gap-x-4 bg-white px-3 py-6 rounded-xl shadow-lg">
+
+				<div class="bg-[#ff6600] rounded-full p-2 text-white">
+					<Icon name="mdi:shield" size="24" />
+				</div>
+
+				<div class="">
+					<p class="font-semibold">
+						Protección total
+					</p>
+					<p class="opacity-75">
+						100% seguro
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>

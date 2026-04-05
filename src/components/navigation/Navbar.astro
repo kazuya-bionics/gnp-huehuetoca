@@ -1,0 +1,89 @@
+---
+
+const currentPath = Astro.url.pathname
+
+const links = [
+    {
+        title:"Servicios",
+        href: "/servicios"
+    },
+    {
+        title:"Nosotros",
+        href: "/nosotros"
+    },
+    {
+        title:"Contacto",
+        href: "/contacto"
+    },
+    
+]
+
+---
+
+<nav 
+  id="navbar"
+  class="w-full h-16 fixed top-0 left-0 bg-white flex items-center justify-between px-8 shadow-xl shadow-slate-100 z-50 transition-transform duration-300"
+>
+    <div>
+        <a href="/" class="font-semibold text-lg">
+            GNP Huehuetoca
+        </a>
+    </div>
+
+    <ul class="flex gap-x-6 items-center text-sm">
+        {
+            links.map( ({ title, href }) => (
+                <li>
+                    <a href={href} 
+                        class=""
+                    >
+                        {title}
+                        {
+                            currentPath === href &&(
+                                <div transition:name="menu-line" class="border-b-2 border-[#ff6600]"/>
+                            )
+                        }
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+
+    <button class="bg-[#ff6600] text-sm px-3 py-1.5 rounded text-white">
+        Hablar con un Experto
+    </button>
+</nav>
+
+<script is:inline>
+  function initNavbarScroll() {
+    let lastScroll = 0;
+    const navbar = document.getElementById("navbar");
+
+    if (!navbar) return;
+
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.scrollY;
+
+      if (currentScroll <= 0) {
+        navbar.classList.remove("-translate-y-full");
+        return;
+      }
+
+      if (Math.abs(currentScroll - lastScroll) < 10) return;
+
+      if (currentScroll > lastScroll) {
+        navbar.classList.add("-translate-y-full");
+      } else {
+        navbar.classList.remove("-translate-y-full");
+      }
+
+      lastScroll = currentScroll;
+    });
+  }
+
+  // Carga inicial
+  document.addEventListener("DOMContentLoaded", initNavbarScroll);
+
+  // Navegación entre páginas en Astro
+  document.addEventListener("astro:page-load", initNavbarScroll);
+</script>
