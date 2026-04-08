@@ -4,25 +4,24 @@ import { Icon } from 'astro-icon/components';
 
 ---
 
-<div class="w-full h-screen bg-slate-200 px-8 flex flex-col justify-center">
+<div class="w-full py-16 bg-slate-200 px-8 flex flex-col justify-center">
     <div class="font-semibold">
-        <p class="text-[#ff6600] text-sm">
+        <p class="text-[#ff6600] md:text-sm text-xs">
         SERVICIOS PREMIUM
         </p>
-        <h3 class="text-3xl mt-2">
+        <h3 class="md:text-3xl text-2xl mt-2">
             Soluciones pensadas para el <span class="border-b-2 border-[#ff6600] italic">bienestar
-            <br/>
             Humano.</span>
         </h3>
     </div>
 
     <!-- grid cards -->
 
-    <div class="w-full grid grid-cols-3 gap-x-16 py-8">
+    <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-16 py-8">
 
         <!-- vida -->
 
-        <div class="bg-white rounded-3xl shadow-xl shadow-slate-200 p-6 grid grid-cols-1 gap-y-8 translate-y-12">
+        <div class="bg-white rounded-3xl shadow-xl shadow-slate-200 p-6 grid grid-cols-1 gap-y-8 md:translate-y-12">
             <div class="text-white bg-slate-900 p-2 w-16 h-16 rounded-3xl items-center justify-center flex">
                 <Icon name="material-symbols:family-restroom" size={28}/>
             </div>
@@ -57,7 +56,7 @@ import { Icon } from 'astro-icon/components';
 
         <!-- AHORRA MAS -->
 
-        <div class="bg-white rounded-3xl shadow-xl shadow-slate-200 p-6 grid grid-cols-1 gap-y-8 translate-y-12 ">
+        <div class="bg-white rounded-3xl shadow-xl shadow-slate-200 p-6 grid grid-cols-1 gap-y-8 md:translate-y-12 ">
             <div class="text-white bg-slate-900 p-2 w-16 h-16 rounded-3xl items-center justify-center flex">
                 <Icon name="material-symbols:savings" size={28} />
             </div>

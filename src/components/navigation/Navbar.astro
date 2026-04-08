@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components"
+
 
 const currentPath = Astro.url.pathname
 
@@ -22,7 +24,7 @@ const links = [
 
 <nav 
   id="navbar"
-  class="w-full h-16 fixed top-0 left-0 bg-white flex items-center justify-between px-8 shadow-xl shadow-slate-100 z-50 transition-transform duration-300"
+  class="w-full h-16 overflow-hidden fixed top-0 left-0 bg-white flex items-center justify-between px-8 shadow-xl shadow-slate-100 z-50 transition-transform duration-300"
 >
     <div>
         <a href="/" class="font-semibold text-lg">
@@ -30,7 +32,7 @@ const links = [
         </a>
     </div>
 
-    <ul class="flex gap-x-6 items-center text-sm">
+    <ul class="md:flex hidden gap-x-6 items-center text-sm ">
         {
             links.map( ({ title, href }) => (
                 <li>
@@ -49,8 +51,11 @@ const links = [
         }
     </ul>
 
-    <button class="bg-[#ff6600] text-sm px-3 py-1.5 rounded text-white">
+    <button class="bg-[#ff6600] text-sm px-3 py-1.5 rounded text-white hidden md:flex">
         Hablar con un Experto
+    </button>
+    <button class="bg-[#ff6600] text-sm px-1.5 py-1.5 rounded-full md:hidden text-white">
+        <Icon name="material-symbols:menu-rounded" size={28}/>
     </button>
 </nav>
 
