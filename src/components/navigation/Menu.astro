@@ -1,0 +1,107 @@
+---
+---
+
+<div 
+    data-menu-panel 
+    class="w-full h-dvh fixed inset-0 bg-white/85 backdrop-blur-xl z-40 flex justify-center items-center shadow-xl shadow-white"
+    style="transform: translateY(-100%); visibility: hidden;"
+>
+    <ul class="text-center text-4xl pt-12 flex flex-col gap-y-6" data-menu-links>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/servicios">Servicios</a></li>
+        <li><a href="/nosotros">Nosotros</a></li>
+        <li><a href="/contacto">Contacto</a></li>
+    </ul>
+</div>
+
+<script>
+  import gsap from "gsap";
+  import { navigate } from "astro:transitions/client"; // 👈 importa esto
+
+  let isOpen = false;
+
+  function getMenuPanel() {
+    return document.querySelector("[data-menu-panel]") as HTMLElement | null;
+  }
+
+  function openMenu() {
+    const panel = getMenuPanel();
+    if (!panel || isOpen) return;
+    isOpen = true;
+
+    panel.style.visibility = "visible";
+
+    gsap.fromTo(
+      panel,
+      { y: "-100%", opacity: 0 },
+      { y: "0%", opacity: 1, duration: 0.8, ease: "power3.out" }
+    );
+
+    const links = panel.querySelectorAll("[data-menu-links] li");
+    gsap.fromTo(
+      links,
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.5, ease: "power2.out", stagger: 0.07, delay: 0.4 }
+    );
+  }
+
+  function closeMenu(onComplete?: () => void) {
+    const panel = getMenuPanel();
+    if (!panel || !isOpen) {
+      onComplete?.();
+      return;
+    }
+    isOpen = false;
+
+    gsap.to(panel, {
+      y: "-100%",
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.in",
+      onComplete: () => {
+        panel.style.visibility = "hidden";
+        onComplete?.();
+      },
+    });
+  }
+
+  function initMenu() {
+    const toggleButtons = document.querySelectorAll("[data-menu-toggle]");
+    toggleButtons.forEach((btn) => {
+      const fresh = btn.cloneNode(true) as HTMLElement;
+      btn.parentNode?.replaceChild(fresh, btn);
+      fresh.addEventListener("click", () => {
+        isOpen ? closeMenu() : openMenu();
+      });
+    });
+
+    const panel = getMenuPanel();
+    if (!panel) return;
+
+    const links = panel.querySelectorAll("a");
+    links.forEach((link) => {
+      const fresh = link.cloneNode(true) as HTMLAnchorElement;
+      link.parentNode?.replaceChild(fresh, link);
+
+      fresh.addEventListener("click", (e) => {
+        const href = fresh.getAttribute("href");
+        if (!href) return;
+
+        e.preventDefault();
+
+        closeMenu(() => {
+          navigate(href); // 👈 usa navigate en lugar de window.location.href
+        });
+      });
+    });
+
+    const p = getMenuPanel();
+    if (p) {
+      gsap.set(p, { y: "-100%", opacity: 0 });
+      p.style.visibility = "hidden";
+      isOpen = false;
+    }
+  }
+
+  document.addEventListener("astro:page-load", initMenu);
+</script>
