@@ -1,9 +1,15 @@
 ---
 
-const { textButton } = Astro.props 
+const { textButton, waMessage="" } = Astro.props 
+
+const waMessagePost = encodeURIComponent(
+  waMessage
+);
 
 ---
 
 <button class="p-3 bg-[#ff6600] shadow-xl rounded-md text-white">
-    <a href="https://wa.me/5217205274302">{textButton}</a>
+    <a href={`https://wa.me/5217205274302?text=${waMessagePost}`}>
+        {textButton}
+    </a>
 </button>

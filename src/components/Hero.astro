@@ -25,7 +25,7 @@ const { image, content } = Astro.props
             {content.description}
         </p>
         <div class="flex gap-x-4 text-sm">
-            <ButtonHero textButton={content.textButton}/>
+            <ButtonHero textButton={content.textButton} waMessage={content.descriptionButton}/>
             <button class="p-3 rounded-md">
                 Asesoria Personalizada
             </button>
