@@ -1,0 +1,52 @@
+---
+
+import heroImage from "@/assets/heroImage.png"
+import { Image } from "astro:assets"
+import { Icon } from 'astro-icon/components';
+import ButtonHero from "@/components/ButtonHero.astro"
+
+const { image, content } = Astro.props
+
+---
+
+<section class="w-full grid grid-cols-1 md:grid-cols-2 bg-[#f8f9fa] text-center md:text-left items-center px-8 pt-28 pb-20 gap-16 md:gap-0">
+    <div class="flex flex-col items-center md:items-start md:gap-y-6 gap-y-8 md:text-sm">
+        <div class="bg-[#ff6600]/35 opacity-75 flex w-50 items-center justify-center gap-x-2 text-xs font-semibold py-1 rounded-full ">
+            <div class="w-2 h-2 rounded-full bg-[#ff6600]"/>
+            <p class="opacity-90">
+                {content.textDecor}
+            </p>
+		</div>
+        <h3 class="md:text-7xl text-5xl font-semibold">
+            {content.title}
+             <span class="text-[#ff6600] italic">{content.titleDecor}</span>
+        </h3>
+        <p class="opacity-55">
+            {content.description}
+        </p>
+        <div class="flex gap-x-4 text-sm">
+            <ButtonHero textButton={content.textButton}/>
+            <button class="p-3 rounded-md">
+                Asesoria Personalizada
+            </button>
+        </div>
+    </div>
+    <div class="flex md:justify-end justify-center relative">
+        <Image src={image} alt="image" width={450} class="rounded-3xl shadow-2xl brightness-85"/>
+        <div class="absolute text-sm -bottom-6 left-16 flex items-center justify-center gap-x-4 bg-white px-3 py-6 rounded-xl shadow-lg">
+
+				<div class="bg-[#ff6600] rounded-full p-2 text-white">
+					<Icon name="material-symbols:hiking-sharp" size={24}/>
+				</div>
+
+				<div class="">
+					<p class="font-semibold">
+						{content.iconText.title}
+					</p>
+					<p class="opacity-75">
+						{content.iconText.subtitle}
+					</p>
+				</div>
+			</div>
+    </div>
+</section>

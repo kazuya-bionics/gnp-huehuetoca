@@ -1,18 +1,29 @@
 ---
-import Hero from '@/components/home/Hero.astro';
+import Hero from '@/components/Hero.astro';
 import Layout from '../layouts/Layout.astro';
 import Services from '@/components/home/Services.astro';
 import Team from '@/components/home/Team.astro';
 import Faq from '@/components/home/Faq.astro';
 import Contact from '@/components/home/Contact.astro';
 
+import heroImage from "@/assets/heroImage.png";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const content = {
+    textDecor: "HABLA CON NOSOTROS",
+    title: "Asesoria que inspira",
+    titleDecor: "Confianza",
+    description: "En GNP Huehuetoca no vendemos polizas; diseñamos legados. Descubre una consultoria humana enfocada en proteger lo que más amas con estrategias a tu medida",
+    textButton: "Hablar con un Experto",
+    iconText: {
+        title: "Proteccion total",
+        subtitle: "100% seguro"
+    }
+}
+
 ---
 
 <Layout title="GNP | Huehuetoca" description="Protegemos tu futuro con seguros confiables y asesoría profesional para ti y tu familia.">
-	<Hero/>
+	<Hero image={heroImage} content={content}/>
 	<Services/>
 	<Team/>
 	<Faq/>

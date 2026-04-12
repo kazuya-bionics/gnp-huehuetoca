@@ -1,10 +1,23 @@
 ---
-import Hero from "@/components/contact/Hero.astro";
+import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 
+import servicesImage from "@/assets/servicesImage.png"
+
+const content = {
+    textDecor: "HABLA CON NOSOTROS",
+    title: "Siempre atentos",
+    titleDecor: "Para ti",
+    description: "Creemos que detrás de cada póliza hay una historia que merece ser protegida. Trabajamos con cercanía y compromiso, buscando siempre brindar confianza y tranquilidad a quienes depositan en nosotros el cuidado de su futuro.",
+    textButton: "Hablar con un Experto",
+    iconText: {
+        title: "Apoyo Total",
+        subtitle: "100% contigo"
+    }
+}
 
 ---
 
 <Layout title="Contacto | Atención al Cliente" description="Contáctanos para recibir información y soporte.">
-    <Hero/>
+    <Hero image={servicesImage} content={content} />
 </Layout>

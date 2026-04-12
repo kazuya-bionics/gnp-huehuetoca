@@ -1,8 +1,22 @@
 ---
 import Contact from "@/components/home/Contact.astro";
-import Hero from "@/components/services/Hero.astro";
 import Services from "@/components/services/Services.astro";
 import Layout from "@/layouts/Layout.astro";
+
+import Hero from "@/components/Hero.astro"
+import servicesImage from "@/assets/servicesImage.png"
+
+const content = {
+    textDecor: "NUESTROS SERVICIOS",
+    title: "Protegemos lo que importa plan",
+    titleDecor: "Vida",
+    description: "Diseñamos estructuras de protección que trascienden generaciones. No es solo una póliza; es el legado de tranquilidad y respaldo para su familia, una forma de cuidar su bienestar hoy y frente a lo inesperado del mañana.",
+    textButton: "Hablar con un Experto",
+    iconText: {
+        title: "Siempre Atentos",
+        subtitle: "100% por ti"
+    }
+}
 
 
 ---
@@ -11,7 +25,7 @@ import Layout from "@/layouts/Layout.astro";
     title="Servicios | Soluciones Profesionales"
     description="Ofrecemos seguros de vida y soluciones personalizadas con atención rápida y profesional."
     >
-    <Hero/>
+    <Hero content={content} image={servicesImage}/>
     <Services/>
     <Contact/>
 </Layout>

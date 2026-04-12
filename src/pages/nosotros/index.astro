@@ -1,12 +1,24 @@
 ---
-import Hero from "@/components/nosotros/Hero.astro";
+import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
+import servicesImage from "@/assets/servicesImage.png"
 
+const content = {
+    textDecor: "NOSOTROS SOMOS",
+    title: "Nuestra vocacion es tu",
+    titleDecor: "Tranquilidad",
+    description: "Creemos que detrás de cada póliza hay una historia que merece ser protegida. Trabajamos con cercanía y compromiso, buscando siempre brindar confianza y tranquilidad a quienes depositan en nosotros el cuidado de su futuro",
+    textButton: "Hablar con un Experto",
+    iconText: {
+        title: "Apoyo Total",
+        subtitle: "100% seguro"
+    }
+}
 
 ---
 
 <Layout title="Nosotros | Nuestra Empresa" description="Conoce quiénes somos y nuestra experiencia.">
 
-    <Hero/>
+    <Hero image={servicesImage} content={content}/>
 
 </Layout>
