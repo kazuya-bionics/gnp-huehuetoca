@@ -1,0 +1,145 @@
+---
+---
+
+<section
+  class="w-full min-h-screen flex items-center justify-center p-4 pt-24 pb-8 sm:p-8 relative overflow-hidden"
+  style="background: linear-gradient(140deg, #f0f4f8 0%, #e8edf3 40%, #dde4ed 100%);"
+>
+  <!-- Orbes decorativos -->
+  <div
+    class="absolute -top-20 -right-16 w-56 h-56 sm:w-80 sm:h-80 rounded-full pointer-events-none"
+    style="background: rgba(249,115,22,0.06);"
+  ></div>
+  <div
+    class="absolute -bottom-24 -left-20 w-64 h-64 sm:w-96 sm:h-96 rounded-full pointer-events-none"
+    style="background: rgba(186,210,235,0.35);"
+  ></div>
+
+  <!-- Panel glass -->
+  <form
+    action="https://api.web3forms.com/submit"
+    method="POST"
+    class="glass-form w-full max-w-md rounded-2xl p-6 sm:p-8 flex flex-col gap-4 relative"
+  >
+    <input type="hidden" name="access_key"  value="a1d84ae9-2fbf-4521-bac0-1d48c2206293" />
+    <input type="hidden" name="redirect" value="https://tusitio.com/gracias" />
+
+    <!-- Header -->
+    <div class="mb-1">
+      <span class="text-xs font-medium uppercase tracking-widest" style="color: #f97316;">
+        ● Contáctanos
+      </span>
+      <h2 class="text-lg sm:text-xl font-medium mt-2 mb-1" style="color: #111827;">
+        ¿Cómo podemos ayudarte?
+      </h2>
+      <p class="text-sm" style="color: #9ca3af;">Te respondemos a la brevedad.</p>
+    </div>
+
+    <!-- Nombre -->
+    <div class="flex flex-col gap-1">
+      <label class="field-label">Nombre</label>
+      <input
+        type="text"
+        name="name"
+        placeholder="Escribe tu nombre"
+        required
+        class="field-input"
+      />
+    </div>
+
+    <!-- Correo -->
+    <div class="flex flex-col gap-1">
+      <label class="field-label">Correo electrónico</label>
+      <input
+        type="email"
+        name="email"
+        placeholder="tu@correo.com"
+        required
+        class="field-input"
+      />
+    </div>
+
+    <!-- Teléfono — fila completa en móvil -->
+    <div class="flex flex-col gap-1">
+      <label class="field-label">Teléfono</label>
+      <input
+        type="tel"
+        name="phone"
+        placeholder="55 1234 5678"
+        class="field-input"
+      />
+    </div>
+
+    <!-- Mensaje -->
+    <div class="flex flex-col gap-1">
+      <label class="field-label">Mensaje</label>
+      <textarea
+        name="message"
+        placeholder="Escríbenos un mensaje..."
+        rows="4"
+        required
+        class="field-input resize-none"
+      ></textarea>
+    </div>
+
+    <!-- Botón -->
+    <button
+      type="submit"
+      class="w-full py-3 rounded-xl text-sm font-medium text-white transition-all hover:opacity-90 active:scale-[0.98] mt-1"
+      style="background: #f97316; min-height: 48px;"
+    >
+      Hablar con un Experto
+    </button>
+
+    <p class="text-center text-xs" style="color: #9ca3af;">
+      También puedes llamarnos directamente
+    </p>
+  </form>
+</section>
+
+<style>
+  .glass-form {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .field-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: #6b7280;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .field-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.09);
+    border-radius: 10px;
+    /* min-height de 48px cumple el mínimo táctil recomendado */
+    padding: 12px 14px;
+    font-size: 16px; /* evita zoom automático en iOS */
+    color: #111827;
+    outline: none;
+    transition: border 0.2s, background 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+    caret-color: #f97316;
+    box-sizing: border-box;
+    /* Evita que iOS redondee inputs */
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .field-input::placeholder {
+    color: #c4c9d4;
+  }
+
+  .field-input:focus {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: #f97316;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+  }
+</style>
