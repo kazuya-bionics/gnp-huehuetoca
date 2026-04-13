@@ -1,7 +1,8 @@
 ---
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
-import servicesImage from "@/assets/servicesImage.png"
+import aboutImage from "@/assets/aboutImage.jpg"
+import About from "@/components/About.astro";
 
 const content = {
     textDecor: "NOSOTROS SOMOS",
@@ -19,6 +20,7 @@ const content = {
 
 <Layout title="Nosotros | Nuestra Empresa" description="Conoce quiénes somos y nuestra experiencia.">
 
-    <Hero image={servicesImage} content={content}/>
+    
+    <About/>
 
 </Layout>

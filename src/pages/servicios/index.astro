@@ -1,10 +1,10 @@
 ---
-import Contact from "@/components/home/Contact.astro";
+import Form from "@/components/Form.astro";
 import Services from "@/components/services/Services.astro";
 import Layout from "@/layouts/Layout.astro";
 
 import Hero from "@/components/Hero.astro"
-import servicesImage from "@/assets/servicesImage.png"
+import servicesImage from "@/assets/servicesImage.jpg"
 
 const content = {
     textDecor: "NUESTROS SERVICIOS",
@@ -27,5 +27,5 @@ const content = {
     >
     <Hero content={content} image={servicesImage}/>
     <Services/>
-    <Contact/>
+    <Form/>
 </Layout>
