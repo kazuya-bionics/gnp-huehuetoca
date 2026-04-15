@@ -1,7 +1,7 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useState, type CSSProperties, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 
 // ── Schema de validación ──────────────────────────────────────
 const schema = z.object({
@@ -23,55 +23,51 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 type Status = "idle" | "loading" | "success" | "error";
 
-// ── Tipos del componente Field ────────────────────────────────
 interface FieldProps {
   label: string;
   error?: string;
   children: ReactNode;
 }
 
-// ── Componente de campo ───────────────────────────────────────
 function Field({ label, error, children }: FieldProps) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-      <label
-        style={{
-          fontSize: "11px",
-          fontWeight: 500,
-          textTransform: "uppercase",
-          letterSpacing: "0.06em",
-          color: "#6b7280",
-        }}
-      >
+    <div className="flex flex-col gap-1.5">
+      <label className="text-[11px] font-medium uppercase tracking-[0.06em] text-gray-500">
         {label}
       </label>
+
       {children}
+
       {error && (
-        <span style={{ fontSize: "12px", color: "#b91c1c" }}>{error}</span>
+        <span className="text-[12px] text-red-700">
+          {error}
+        </span>
       )}
     </div>
   );
 }
 
-// ── Estilos de input ──────────────────────────────────────────
-function inputStyle(hasError: boolean): CSSProperties {
-  return {
-    width: "100%",
-    borderRadius: "12px",
-    border: hasError ? "1px solid #ef4444" : "1px solid rgba(0,0,0,0.08)",
-    background: "rgba(255,255,255,0.65)",
-    padding: "12px 16px",
-    fontFamily: "DM Sans, sans-serif",
-    fontSize: "16px",
-    color: "#111827",
-    outline: "none",
-    boxSizing: "border-box",
-    boxShadow: hasError ? "0 0 0 3px rgba(239,68,68,0.10)" : "none",
-    transition: "border 0.2s, box-shadow 0.2s, background 0.2s",
-  };
+function inputClasses(hasError: boolean) {
+  return `
+    w-full
+    rounded-xl
+    border
+    ${hasError ? "border-red-500 ring-2 ring-red-500/10" : "border-black/10"}
+    bg-white/65
+    px-4
+    py-3
+    font-sans
+    text-base
+    text-gray-900
+    outline-none
+    transition
+    focus:border-orange-500
+    focus:bg-white/90
+    focus:ring-2
+    focus:ring-orange-500/10
+  `;
 }
 
-// ── Tipos para los links de contacto ─────────────────────────
 interface ContactLink {
   href: string;
   label: string;
@@ -79,7 +75,6 @@ interface ContactLink {
   icon: ReactNode;
 }
 
-// ── Componente principal ──────────────────────────────────────
 export default function Form() {
   const [status, setStatus] = useState<Status>("idle");
 
@@ -96,21 +91,49 @@ export default function Form() {
     setStatus("loading");
 
     const formData = new FormData();
-    formData.append("access_key", "a1d84ae9-2fbf-4521-bac0-1d48c2206293");
-    formData.append("to", "leonardo.acosta@gnp.com.mx");
-    formData.append("subject", "Nuevo contacto desde GNP Huehuetoca");
-    formData.append("from_name", "Sitio Web GNP Huehuetoca");
+
+    formData.append(
+      "access_key",
+      "a1d84ae9-2fbf-4521-bac0-1d48c2206293"
+    );
+
+    formData.append(
+      "to",
+      "leonardo.acosta@gnp.com.mx"
+    );
+
+    formData.append(
+      "subject",
+      "Nuevo contacto desde GNP Huehuetoca"
+    );
+
+    formData.append(
+      "from_name",
+      "Sitio Web GNP Huehuetoca"
+    );
+
     formData.append("botcheck", "");
-    (Object.entries(data) as [string, string | undefined][]).forEach(([k, v]) =>
+
+    (
+      Object.entries(data) as [
+        string,
+        string | undefined
+      ][]
+    ).forEach(([k, v]) =>
       formData.append(k, v ?? "")
     );
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        "https://api.web3forms.com/submit",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
       const json = await res.json();
+
       if (json.success) {
         setStatus("success");
         reset();
@@ -137,7 +160,13 @@ export default function Form() {
       value: "leonardo.acosta@gnp.com.mx",
       icon: (
         <>
-          <rect width="20" height="16" x="2" y="4" rx="2" />
+          <rect
+            width="20"
+            height="16"
+            x="2"
+            y="4"
+            rx="2"
+          />
           <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
         </>
       ),
@@ -145,212 +174,341 @@ export default function Form() {
   ];
 
   return (
-    <section
-      style={{
-        position: "relative",
-        minHeight: "100svh",
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        overflow: "hidden",
-        background: "linear-gradient(to bottom right, #f5f7fa, #edf1f7, #e2eaf4)",
-        padding: "48px 36px",
-        boxSizing: "border-box",
-      }}
-    >
-      {/* Orbes de fondo */}
-      <div style={{ pointerEvents: "none", position: "absolute", top: "-120px", right: "-100px", height: "420px", width: "420px", borderRadius: "50%", background: "radial-gradient(circle, rgba(249,115,22,0.09) 0%, transparent 70%)", filter: "blur(48px)" }} />
-      <div style={{ pointerEvents: "none", position: "absolute", bottom: "-160px", left: "-140px", height: "500px", width: "500px", borderRadius: "50%", background: "radial-gradient(circle, rgba(147,197,253,0.22) 0%, transparent 70%)", filter: "blur(48px)" }} />
-      <div style={{ pointerEvents: "none", position: "absolute", top: "40%", left: "38%", height: "260px", width: "260px", borderRadius: "50%", background: "radial-gradient(circle, rgba(249,115,22,0.05) 0%, transparent 70%)", filter: "blur(48px)" }} />
+    <section className="
+      relative
+      min-h-svh
+      w-full
+      flex
+      items-center
+      justify-center
+      overflow-hidden
+      bg-gradient-to-br
+      from-[#f5f7fa]
+      via-[#edf1f7]
+      to-[#e2eaf4]
+      px-8
+      py-12
+      box-border
+    ">
 
-      <div
-        style={{
-          position: "relative",
-          zIndex: 10,
-          width: "100%",
-          maxWidth: "900px",
-          display: "grid",
-          gridTemplateColumns: "1fr",
-          gap: "32px",
-        }}
-      >
-        <style>{`
-          @media (min-width: 768px) {
-            .gnp-grid { grid-template-columns: 1fr 1.15fr !important; align-items: center; gap: 48px !important; }
-            .gnp-phones { grid-template-columns: 1fr 1fr !important; }
-          }
-          .gnp-contact-link:hover { transform: translateY(-1px); background: rgba(255,255,255,0.75) !important; }
-          .gnp-contact-link:active { transform: scale(0.98); }
-          .gnp-input:focus { border-color: #f97316 !important; background: rgba(255,255,255,0.92) !important; box-shadow: 0 0 0 3px rgba(249,115,22,0.11) !important; }
-          .gnp-btn:hover:not(:disabled) { transform: translateY(-1px); background: #ea6c0a !important; box-shadow: 0 6px 24px rgba(249,115,22,0.4) !important; }
-          .gnp-btn:active:not(:disabled) { transform: scale(0.98); }
-          .gnp-btn:disabled { opacity: 0.65; cursor: not-allowed; }
-        `}</style>
+      {/* Orbes */}
+      <div className="
+        pointer-events-none
+        absolute
+        -top-[120px]
+        -right-[100px]
+        h-[420px]
+        w-[420px]
+        rounded-full
+        bg-[radial-gradient(circle,rgba(249,115,22,0.09)_0%,transparent_70%)]
+        blur-[48px]
+      " />
 
-        <div className="gnp-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: "32px" }}>
+      <div className="
+        pointer-events-none
+        absolute
+        -bottom-[160px]
+        -left-[140px]
+        h-[500px]
+        w-[500px]
+        rounded-full
+        bg-[radial-gradient(circle,rgba(147,197,253,0.22)_0%,transparent_70%)]
+        blur-[48px]
+      " />
 
-          {/* ── Columna izquierda ── */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-            <span style={{ fontSize: "11px", fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.08em", color: "#f97316" }}>
-              ● Contáctanos
-            </span>
+      <div className="
+        pointer-events-none
+        absolute
+        top-[40%]
+        left-[38%]
+        h-[260px]
+        w-[260px]
+        rounded-full
+        bg-[radial-gradient(circle,rgba(249,115,22,0.05)_0%,transparent_70%)]
+        blur-[48px]
+      " />
 
-            <h2 style={{ margin: 0, fontSize: "clamp(2rem, 5vw, 2.75rem)", fontWeight: 500, lineHeight: 1.2, color: "#111827" }}>
-              Hablemos sobre<br />
-              tu <em style={{ fontStyle: "italic", color: "#f97316" }}>tranquilidad</em>
-            </h2>
+      <div className="
+        relative
+        z-10
+        w-full
+        grid
+        gap-8
+        md:grid-cols-[1fr_1.15fr]
+        md:items-center
+        md:gap-12
+      ">
 
-            <p style={{ margin: 0, maxWidth: "36ch", fontSize: "15px", lineHeight: 1.7, color: "#6b7280" }}>
-              En GNP Huehuetoca diseñamos estrategias a tu medida.
-              Déjanos tus datos y un experto te contactará pronto.
-            </p>
+        {/* Columna izquierda */}
+        <div className="flex flex-col gap-5">
 
-            <div style={{ marginTop: "8px", display: "flex", flexDirection: "column", gap: "12px" }}>
-              {contactLinks.map(({ href, label, value, icon }) => (
+          <span className="
+            text-[11px]
+            font-medium
+            uppercase
+            tracking-[0.08em]
+            text-orange-500
+          ">
+            ● Contáctanos
+          </span>
+
+          <h2 className="
+            m-0
+            text-[clamp(2rem,5vw,2.75rem)]
+            font-medium
+            leading-tight
+            text-gray-900
+          ">
+            Hablemos sobre
+            <br />
+            tu{" "}
+            <em className="
+              italic
+              text-orange-500
+            ">
+              tranquilidad
+            </em>
+          </h2>
+
+          <p className="
+            m-0
+            max-w-[36ch]
+            text-[15px]
+            leading-7
+            text-gray-500
+          ">
+            En GNP Huehuetoca diseñamos estrategias
+            a tu medida. Déjanos tus datos y un
+            experto te contactará pronto.
+          </p>
+
+          <div className="
+            mt-2
+            flex
+            flex-col
+            gap-3
+          ">
+            {contactLinks.map(
+              ({
+                href,
+                label,
+                value,
+                icon,
+              }) => (
                 <a
                   key={href}
                   href={href}
-                  className="gnp-contact-link"
-                  style={{
-                    display: "flex", alignItems: "center", gap: "12px",
-                    borderRadius: "14px", border: "1px solid rgba(255,255,255,0.8)",
-                    background: "rgba(255,255,255,0.5)", padding: "12px 16px",
-                    textDecoration: "none", backdropFilter: "blur(12px)",
-                    transition: "all 0.2s",
-                  }}
+                  className="
+                    flex
+                    items-center
+                    gap-3
+                    rounded-xl
+                    border
+                    border-white/80
+                    bg-white/50
+                    px-4
+                    py-3
+                    no-underline
+                    backdrop-blur-xl
+                    transition
+                    hover:-translate-y-[1px]
+                    hover:bg-white/75
+                    active:scale-95
+                  "
                 >
-                  <span style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "36px", width: "36px", borderRadius: "10px", background: "rgba(249,115,22,0.10)", color: "#f97316", flexShrink: 0 }}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <span className="
+                    flex
+                    items-center
+                    justify-center
+                    h-9
+                    w-9
+                    rounded-lg
+                    bg-orange-500/10
+                    text-orange-500
+                    shrink-0
+                  ">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       {icon}
                     </svg>
                   </span>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: 0 }}>
-                    <span style={{ fontSize: "11px", fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.05em", color: "#9ca3af" }}>{label}</span>
-                    <span style={{ fontSize: "14px", fontWeight: 500, color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{value}</span>
+
+                  <div className="
+                    flex
+                    flex-col
+                    gap-[2px]
+                    min-w-0
+                  ">
+                    <span className="
+                      text-[11px]
+                      font-medium
+                      uppercase
+                      tracking-[0.05em]
+                      text-gray-400
+                    ">
+                      {label}
+                    </span>
+
+                    <span className="
+                      text-sm
+                      font-medium
+                      text-gray-900
+                      truncate
+                    ">
+                      {value}
+                    </span>
                   </div>
                 </a>
-              ))}
-            </div>
-          </div>
-
-          {/* ── Columna derecha: formulario ── */}
-          <div
-            style={{
-              borderRadius: "24px",
-              border: "1px solid rgba(255,255,255,0.8)",
-              background: "rgba(255,255,255,0.52)",
-              padding: "40px",
-              boxShadow: "0 8px 40px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.95)",
-              backdropFilter: "blur(32px)",
-            }}
-          >
-            <form onSubmit={handleSubmit(onSubmit)} noValidate>
-              <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-
-                {/* Nombre */}
-                <Field label="Nombre completo" error={errors.name?.message}>
-                  <input
-                    {...register("name")}
-                    type="text"
-                    placeholder="¿Cómo te llamas?"
-                    autoComplete="name"
-                    className="gnp-input"
-                    style={inputStyle(!!errors.name)}
-                  />
-                </Field>
-
-                {/* Correo + Teléfono */}
-                <div className="gnp-phones" style={{ display: "grid", gridTemplateColumns: "1fr", gap: "16px" }}>
-                  <Field label="Correo" error={errors.email?.message}>
-                    <input
-                      {...register("email")}
-                      type="email"
-                      placeholder="tu@correo.com"
-                      autoComplete="email"
-                      className="gnp-input"
-                      style={inputStyle(!!errors.email)}
-                    />
-                  </Field>
-                  <Field label="Teléfono" error={errors.phone?.message}>
-                    <input
-                      {...register("phone")}
-                      type="tel"
-                      placeholder="55 1234 5678"
-                      autoComplete="tel"
-                      className="gnp-input"
-                      style={inputStyle(!!errors.phone)}
-                    />
-                  </Field>
-                </div>
-
-                {/* Mensaje */}
-                <Field label="Mensaje" error={errors.message?.message}>
-                  <textarea
-                    {...register("message")}
-                    placeholder="Cuéntanos en qué te podemos ayudar..."
-                    rows={4}
-                    className="gnp-input"
-                    style={{ ...inputStyle(!!errors.message), resize: "none" }}
-                  />
-                </Field>
-
-                {/* Botón */}
-                <button
-                  type="submit"
-                  disabled={status === "loading"}
-                  className="gnp-btn"
-                  style={{
-                    marginTop: "4px",
-                    display: "flex",
-                    minHeight: "52px",
-                    width: "100%",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "10px",
-                    borderRadius: "14px",
-                    border: "none",
-                    background: "#f97316",
-                    padding: "14px 24px",
-                    fontFamily: "DM Sans, sans-serif",
-                    fontSize: "15px",
-                    fontWeight: 500,
-                    letterSpacing: "0.02em",
-                    color: "#fff",
-                    boxShadow: "0 4px 20px rgba(249,115,22,0.3)",
-                    transition: "all 0.2s",
-                    cursor: "pointer",
-                  }}
-                >
-                  <span>{status === "loading" ? "Enviando..." : "Hablar con un Experto"}</span>
-                  <span style={{ fontSize: "17px" }}>→</span>
-                </button>
-
-                {/* Mensajes de estado */}
-                {status === "success" && (
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", borderRadius: "12px", border: "1px solid rgba(34,197,94,0.25)", background: "rgba(34,197,94,0.10)", padding: "12px 16px", fontSize: "14px", fontWeight: 500, color: "#166534" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                      <polyline points="22 4 12 14.01 9 11.01" />
-                    </svg>
-                    ¡Mensaje enviado! Te contactaremos pronto.
-                  </div>
-                )}
-                {status === "error" && (
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", borderRadius: "12px", border: "1px solid rgba(239,68,68,0.20)", background: "rgba(239,68,68,0.09)", padding: "12px 16px", fontSize: "14px", fontWeight: 500, color: "#b91c1c" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10" />
-                      <line x1="12" x2="12" y1="8" y2="12" />
-                      <line x1="12" x2="12.01" y1="16" y2="16" />
-                    </svg>
-                    Algo salió mal. Intenta de nuevo.
-                  </div>
-                )}
-
-              </div>
-            </form>
+              )
+            )}
           </div>
         </div>
+
+        {/* Formulario */}
+        <div className="
+          rounded-3xl
+          border
+          border-white/80
+          bg-white/50
+          p-10
+          shadow-[0_8px_40px_rgba(0,0,0,0.07)]
+          backdrop-blur-3xl
+        ">
+
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+          >
+            <div className="
+              flex
+              flex-col
+              gap-4
+            ">
+
+              <Field
+                label="Nombre completo"
+                error={errors.name?.message}
+              >
+                <input
+                  {...register("name")}
+                  type="text"
+                  placeholder="¿Cómo te llamas?"
+                  autoComplete="name"
+                  className={inputClasses(
+                    !!errors.name
+                  )}
+                />
+              </Field>
+
+              <div className="
+                grid
+                gap-4
+                md:grid-cols-2
+              ">
+
+                <Field
+                  label="Correo"
+                  error={errors.email?.message}
+                >
+                  <input
+                    {...register("email")}
+                    type="email"
+                    placeholder="tu@correo.com"
+                    autoComplete="email"
+                    className={inputClasses(
+                      !!errors.email
+                    )}
+                  />
+                </Field>
+
+                <Field
+                  label="Teléfono"
+                  error={errors.phone?.message}
+                >
+                  <input
+                    {...register("phone")}
+                    type="tel"
+                    placeholder="55 1234 5678"
+                    autoComplete="tel"
+                    className={inputClasses(
+                      !!errors.phone
+                    )}
+                  />
+                </Field>
+
+              </div>
+
+              <Field
+                label="Mensaje"
+                error={errors.message?.message}
+              >
+                <textarea
+                  {...register("message")}
+                  rows={4}
+                  placeholder="Cuéntanos en qué te podemos ayudar..."
+                  className={inputClasses(
+                    !!errors.message
+                  )}
+                  style={{ resize: "none" }}
+                />
+              </Field>
+
+              <button
+                type="submit"
+                disabled={
+                  status === "loading"
+                }
+                className="
+                  mt-1
+                  flex
+                  min-h-[52px]
+                  w-full
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-xl
+                  border-none
+                  bg-orange-500
+                  px-6
+                  py-3.5
+                  text-[15px]
+                  font-medium
+                  tracking-[0.02em]
+                  text-white
+                  shadow-lg
+                  transition
+                  hover:-translate-y-[1px]
+                  hover:bg-orange-600
+                  hover:shadow-xl
+                  active:scale-95
+                  disabled:opacity-65
+                  disabled:cursor-not-allowed
+                "
+              >
+                <span>
+                  {status === "loading"
+                    ? "Enviando..."
+                    : "Hablar con un Experto"}
+                </span>
+
+                <span className="text-[17px]">
+                  →
+                </span>
+              </button>
+
+            </div>
+          </form>
+
+        </div>
+
       </div>
     </section>
   );
