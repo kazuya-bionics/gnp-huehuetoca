@@ -3,8 +3,7 @@ import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 
 import servicesImage from "@/assets/servicesImage.png"
-import Form from "@/components/Form.astro";
-import Contact from "@/components/home/Contact.astro";
+import Form from "@/components/Form.tsx";
 
 const content = {
     textDecor: "HABLA CON NOSOTROS",
@@ -21,5 +20,5 @@ const content = {
 ---
 
 <Layout title="Contacto | Atención al Cliente" description="Contáctanos para recibir información y soporte.">
-    <Form/>
+    <Form client:load/>
 </Layout>

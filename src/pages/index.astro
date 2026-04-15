@@ -6,7 +6,7 @@ import Team from '@/components/home/Team.astro';
 import Faq from '@/components/home/Faq.astro';
 
 import heroImage from "@/assets/heroImage.png";
-import Form from '@/components/Form.astro';
+import Form from '@/components/Form.tsx';
 
 const content = {
     textDecor: "HABLA CON NOSOTROS",
@@ -28,5 +28,5 @@ const content = {
 	<Services/>
 	<Team/>
 	<Faq/>
-	<Form/>
+	<Form client:load/>
 </Layout>
